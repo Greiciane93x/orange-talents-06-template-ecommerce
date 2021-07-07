@@ -1,12 +1,9 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.validacao;
 
-import org.springframework.util.Assert;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class NotFutureValidator implements ConstraintValidator<NotFuture, Object> {
     private String atributoUnico;

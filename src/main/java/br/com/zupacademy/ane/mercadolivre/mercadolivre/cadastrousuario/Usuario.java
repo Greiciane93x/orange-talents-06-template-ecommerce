@@ -25,7 +25,7 @@ public class Usuario {
     }
 
     public Usuario(String login, String senha, LocalDate instante) {
-        senha= Base64.encodeBase64String(senha.getBytes());
+        senha = Base64.encodeBase64String(senha.getBytes());
         this.login = login;
         this.senha = senha;
         this.instante = instante;
