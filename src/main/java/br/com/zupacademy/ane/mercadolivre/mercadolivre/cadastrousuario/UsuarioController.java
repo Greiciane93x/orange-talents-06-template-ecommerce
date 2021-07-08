@@ -1,6 +1,5 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario;
 
-import feign.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,13 +16,13 @@ public class UsuarioController {
     @PersistenceContext
     private EntityManager manager;
 
-
-    @PostMapping(value="/usuario")
+    @PostMapping(value = "/usuario")
     @Transactional
-    public ResponseEntity<String> cadastrar(@RequestBody @Valid UsuarioForm form){
+    public ResponseEntity<UsuarioDto> cadastrar(@RequestBody @Valid UsuarioForm form) {
         Usuario usuario = form.converter(manager);
         manager.persist(usuario);
 
-       return ResponseEntity.ok().body("Usuário cadastrado!");
+        return ResponseEntity.ok().build();
     }
+
 }

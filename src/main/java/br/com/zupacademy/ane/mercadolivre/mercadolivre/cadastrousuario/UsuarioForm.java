@@ -13,27 +13,19 @@ import java.time.LocalDate;
 public class UsuarioForm {
 
 
-    @NotNull
-    @NotFuture(domainClass = Usuario.class, fieldName = "instante")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
-    private LocalDate instante;
     @NotBlank @NotNull
     @Email @ValorUnico(domainClass = Usuario.class, fieldName = "login")
     private String login;
     @NotBlank @NotNull
     private String senha;
 
+
     public UsuarioForm() {
     }
 
-    public UsuarioForm(LocalDate instante, String login, String senha) {
-        this.instante = instante;
+    public UsuarioForm(String login, String senha) {
         this.login = login;
         this.senha = senha;
-    }
-
-    public LocalDate getInstante() {
-        return instante;
     }
 
     public String getLogin() {
@@ -44,8 +36,9 @@ public class UsuarioForm {
        return senha;
     }
 
+
     public Usuario converter(EntityManager manager) {
-       return new Usuario(login, senha, instante);
+       return new Usuario(login, new UsuarioSenhaLimpa(senha));
     }
 
 }
