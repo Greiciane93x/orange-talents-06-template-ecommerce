@@ -10,7 +10,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 
 @EnableWebSecurity
 @Configuration
-
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
     @Override

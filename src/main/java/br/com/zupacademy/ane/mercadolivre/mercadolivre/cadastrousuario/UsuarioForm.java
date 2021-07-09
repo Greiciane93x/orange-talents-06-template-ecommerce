@@ -1,14 +1,11 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario;
 
-import br.com.zupacademy.ane.mercadolivre.mercadolivre.validacao.NotFuture;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.validacao.ValorUnico;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 public class UsuarioForm {
 

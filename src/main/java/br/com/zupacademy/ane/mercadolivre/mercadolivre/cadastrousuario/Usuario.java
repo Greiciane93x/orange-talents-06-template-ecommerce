@@ -1,7 +1,5 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario;
 
-import br.com.zupacademy.ane.mercadolivre.mercadolivre.validacao.NotFuture;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,13 +7,10 @@ import javax.persistence.*;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
 
 @Entity
-public class Usuario{
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -32,7 +27,9 @@ public class Usuario{
     public Usuario() {
     }
 
+
     public Usuario(String login, UsuarioSenhaLimpa senhaLimpaUsuario) {
+
         this.login = login;
         this.senha = senhaLimpaUsuario.hash();
         this.instante = instante.now();
@@ -50,4 +47,38 @@ public class Usuario{
         return instante;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

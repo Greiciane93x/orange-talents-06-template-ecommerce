@@ -1,9 +1,6 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.autenticausuario;
 
-import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.Usuario;
-import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.UsuarioDto;
-import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.UsuarioForm;
-import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.UsuarioRepository;
+import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.*;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.seguranca.GeraToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -31,10 +29,11 @@ public class AutenticaUsuarioController {
 
     @PostMapping(value = "/auth")
     @Transactional
-    public ResponseEntity<UsuarioDto> autenticaUsuario(@RequestBody UsuarioForm usuarioForm)  {
-        Optional<UsuarioLogado> usuarioLogado = usuarioRepository.findByLogin(usuarioForm.getLogin());
-        if(usuarioLogado.isPresent()) {
-            String token = geraToken.geraToken(usuarioLogado);
+    public ResponseEntity<UsuarioDto> autenticaUsuario(@RequestBody @Valid UsuarioLogado usuarioLogado)  {
+        Optional<Usuario> usuarioLogar = usuarioRepository.findByLogin(usuarioLogado.getLogin());
+        Usuario usuario = usuarioLogado.converter(usuarioRepository);
+        if(usuarioLogar.isPresent()) {
+            String token = geraToken.geraToken(usuarioLogar);
             System.out.println(token);
             return ResponseEntity.ok().build();
         }else{
