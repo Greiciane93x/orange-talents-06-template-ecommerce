@@ -10,7 +10,6 @@ public class ProdutoDto {
     private BigDecimal valor;
     private Long quantidade;
     private LocalDateTime instante;
-    private Set<Caracteristica> caracteristica;
     private CategoriaProduto categoriaProduto;
 
     public ProdutoDto() {
@@ -21,7 +20,6 @@ public class ProdutoDto {
         this.valor = produto.getValor();
         this.quantidade = produto.getQuantidade();
         this.instante = produto.getInstante();
-        this.caracteristica = produto.getCaracteristica();
         this.categoriaProduto = produto.getCategoria();
 
     }
@@ -39,10 +37,6 @@ public class ProdutoDto {
 
     public LocalDateTime getInstante() {
         return instante;
-    }
-
-    public Set<Caracteristica> getCaracteristica() {
-        return caracteristica;
     }
 
     public CategoriaProduto getCategoriaProduto() {

@@ -1,9 +1,15 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastraproduto;
 
+import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.Usuario;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 public class Produto {
@@ -13,38 +19,39 @@ public class Produto {
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
+    @Positive
     private BigDecimal valor;
     @Column(nullable = false)
+    @Positive
     private Long quantidade;
+    @Column(nullable = false)
+    private String descricao;
     private LocalDateTime instante;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "caracteristica_id")
-    private Set<Caracteristica> caracteristica;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoria_id")
+    @Valid
+    @NotNull
+    @ManyToOne
     private CategoriaProduto categoria;
+
+    @Valid
+    @NotNull
+    @ManyToOne
+    private Usuario usuarioAuth;
 
     @Deprecated
     public Produto() {
     }
 
-    public Produto(String nome, BigDecimal valor, Long quantidade, Set<Caracteristica> caracteristica, CategoriaProduto categoria) {
+    public Produto(@NotNull @NotBlank String nome, @NotNull @Positive BigDecimal valor,
+                   @NotNull @Positive Long quantidade, @NotBlank @Length(max = 1000) String descricao,
+                   @NotNull @Valid CategoriaProduto categoria, @NotNull @Valid Usuario usuarioAuth) {
         this.nome = nome;
-        if(valor.compareTo(BigDecimal.ZERO) <= 0){
-            throw new IllegalArgumentException();
-        }
         this.valor = valor;
-        if(quantidade <=0){
-            throw new IllegalArgumentException();
-        }
         this.quantidade = quantidade;
+        this.descricao = descricao;
         this.instante = instante.now();
-        this.caracteristica = caracteristica;
         this.categoria = categoria;
     }
-
 
     public String getNome() {
         return nome;
@@ -62,9 +69,7 @@ public class Produto {
         return instante;
     }
 
-    public Set<Caracteristica> getCaracteristica() {
-        return caracteristica;
-    }
+    public String getDescricao() { return descricao; }
 
     public CategoriaProduto getCategoria() {
         return categoria;
