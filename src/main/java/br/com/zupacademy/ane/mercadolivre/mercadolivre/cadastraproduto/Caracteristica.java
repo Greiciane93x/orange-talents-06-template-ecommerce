@@ -14,13 +14,14 @@ public class Caracteristica {
     @Max(1000)
     private String descricao;
 
+    @Deprecated
+    public Caracteristica() {
+    }
     public Caracteristica(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
-    @Deprecated
-    public Caracteristica() {
-    }
+
 
     public String getNome() {
         return nome;

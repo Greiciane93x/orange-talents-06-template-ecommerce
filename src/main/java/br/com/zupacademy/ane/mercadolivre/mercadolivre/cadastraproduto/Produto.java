@@ -1,12 +1,9 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastraproduto;
 
-
-import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrocategoria.Categoria;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Produto {
@@ -21,19 +18,19 @@ public class Produto {
     private Long quantidade;
     private LocalDateTime instante;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name="caracteristica_id")
-    private Caracteristica caracteristica;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "caracteristica_id")
+    private Set<Caracteristica> caracteristica;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "categoria_id")
+    @JoinColumn(name = "categoria_id")
     private CategoriaProduto categoria;
 
     @Deprecated
     public Produto() {
     }
 
-    public Produto(String nome, BigDecimal valor, Long quantidade, LocalDateTime instante, Caracteristica caracteristica, CategoriaProduto categoria) {
+    public Produto(String nome, BigDecimal valor, Long quantidade, Set<Caracteristica> caracteristica, CategoriaProduto categoria) {
         this.nome = nome;
         if(valor.compareTo(BigDecimal.ZERO) <= 0){
             throw new IllegalArgumentException();
@@ -47,6 +44,7 @@ public class Produto {
         this.caracteristica = caracteristica;
         this.categoria = categoria;
     }
+
 
     public String getNome() {
         return nome;
@@ -64,7 +62,7 @@ public class Produto {
         return instante;
     }
 
-    public Caracteristica getCaracteristica() {
+    public Set<Caracteristica> getCaracteristica() {
         return caracteristica;
     }
 

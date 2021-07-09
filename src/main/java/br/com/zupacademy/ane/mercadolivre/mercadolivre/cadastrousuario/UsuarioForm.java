@@ -33,7 +33,6 @@ public class UsuarioForm {
        return senha;
     }
 
-
     public Usuario converter(EntityManager manager) {
        return new Usuario(login, new UsuarioSenhaLimpa(senha));
     }
