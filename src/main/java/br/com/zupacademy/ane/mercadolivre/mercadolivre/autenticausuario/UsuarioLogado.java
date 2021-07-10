@@ -32,4 +32,5 @@ public class UsuarioLogado {
     public Usuario converter(UsuarioRepository usuarioRepository) {
         return new Usuario(login, new UsuarioSenhaLimpa(senha));
     }
+
 }

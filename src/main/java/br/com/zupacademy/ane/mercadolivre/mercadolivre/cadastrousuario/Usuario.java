@@ -27,11 +27,13 @@ public class Usuario implements UserDetails {
     public Usuario() {
     }
 
-
     public Usuario(String login, UsuarioSenhaLimpa senhaLimpaUsuario) {
         this.login = login;
         this.senha = senhaLimpaUsuario.hash();
         this.instante = instante.now();
+    }
+
+    public Usuario(String login, String senha) {
     }
 
     public String getLogin() {
