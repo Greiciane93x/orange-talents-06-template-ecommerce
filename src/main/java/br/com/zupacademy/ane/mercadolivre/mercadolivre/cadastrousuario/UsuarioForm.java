@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 
 public class UsuarioForm {
 
-
     @NotBlank @NotNull
     @Email @ValorUnico(domainClass = Usuario.class, fieldName = "login")
     private String login;

@@ -40,4 +40,5 @@ public class AutenticaUsuarioController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
+
 }

@@ -1,8 +1,9 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastraproduto;
 
+import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrocategoria.Categoria;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 public class ProdutoDto {
 
@@ -10,7 +11,7 @@ public class ProdutoDto {
     private BigDecimal valor;
     private Long quantidade;
     private LocalDateTime instante;
-    private CategoriaProduto categoriaProduto;
+    private Categoria categoria;
 
     public ProdutoDto() {
     }
@@ -20,7 +21,7 @@ public class ProdutoDto {
         this.valor = produto.getValor();
         this.quantidade = produto.getQuantidade();
         this.instante = produto.getInstante();
-        this.categoriaProduto = produto.getCategoria();
+        this.categoria = produto.getCategoria();
 
     }
     public String getNome() {
@@ -39,7 +40,7 @@ public class ProdutoDto {
         return instante;
     }
 
-    public CategoriaProduto getCategoriaProduto() {
-        return categoriaProduto;
+    public Categoria getCategoria() {
+        return categoria;
     }
 }

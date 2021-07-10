@@ -29,7 +29,6 @@ public class Usuario implements UserDetails {
 
 
     public Usuario(String login, UsuarioSenhaLimpa senhaLimpaUsuario) {
-
         this.login = login;
         this.senha = senhaLimpaUsuario.hash();
         this.instante = instante.now();

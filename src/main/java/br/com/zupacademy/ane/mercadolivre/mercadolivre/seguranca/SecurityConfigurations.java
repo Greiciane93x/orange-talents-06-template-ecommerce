@@ -17,6 +17,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/usuario").permitAll()
+                .antMatchers(HttpMethod.POST, "/categoria").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -24,8 +25,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
-
-
 
     public void configure(WebSecurity web) throws Exception{
         web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**","/swagger-resources/**" );
