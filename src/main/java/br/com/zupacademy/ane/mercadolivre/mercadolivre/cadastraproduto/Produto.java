@@ -1,7 +1,9 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastraproduto;
 
+import br.com.zupacademy.ane.mercadolivre.mercadolivre.adicionapergunta.Pergunta;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrocategoria.Categoria;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.Usuario;
+import br.com.zupacademy.ane.mercadolivre.mercadolivre.detalheproduto.DetalheProdutoCaracteristica;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.util.Assert;
 
@@ -11,6 +13,7 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Entity
@@ -41,6 +44,10 @@ public class Produto {
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
     private Set<ImagemProduto> images = new HashSet<>();
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    @OrderBy("titulo asc")
+    private SortedSet<Pergunta> perguntas = new TreeSet<>();
 
     @Deprecated
     public Produto() {
@@ -103,12 +110,22 @@ public class Produto {
         return usuarioAuth;
     }
 
+    public Set<Pergunta> getPerguntas() {
+        return perguntas;
+    }
+
     public Set<CaracteristicaProduto> getCaracteristicas() {
         return caracteristicas;
     }
 
-    public Set<ImagemProduto> getImages() {
-        return images;
+    public Set<DetalheProdutoCaracteristica> mapeiaCaracteristica(Function<CaracteristicaProduto, DetalheProdutoCaracteristica> funcaoMapeadora){
+        return this.caracteristicas.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+    public <T>Set<T> mapeiaLinks(Function<ImagemProduto, T> funcaoMapeadora){
+        return this.images.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+    public <T extends Comparable<T>> SortedSet<T> mapeiaPerguntas(Function<Pergunta, T> funcaoMapeadora){
+        return this.perguntas.stream().map(funcaoMapeadora).collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Override
