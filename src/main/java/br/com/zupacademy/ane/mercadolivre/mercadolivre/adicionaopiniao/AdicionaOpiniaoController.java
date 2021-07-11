@@ -1,6 +1,7 @@
-package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastraproduto;
+package br.com.zupacademy.ane.mercadolivre.mercadolivre.adicionaopiniao;
 
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.autenticausuario.UsuarioRepository;
+import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastraproduto.Produto;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

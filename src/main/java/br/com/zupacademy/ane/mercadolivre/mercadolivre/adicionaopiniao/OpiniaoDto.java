@@ -1,4 +1,6 @@
-package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastraproduto;
+package br.com.zupacademy.ane.mercadolivre.mercadolivre.adicionaopiniao;
+
+import br.com.zupacademy.ane.mercadolivre.mercadolivre.adicionaopiniao.Opiniao;
 
 public class OpiniaoDto {
 

@@ -82,4 +82,8 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
+    public String getEmail() {
+        return this.login;
+    }
 }
