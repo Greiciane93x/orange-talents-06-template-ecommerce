@@ -1,5 +1,6 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.adicionaopiniao;
 
+import br.com.zupacademy.ane.mercadolivre.mercadolivre.autenticausuario.UsuarioLogado;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.autenticausuario.UsuarioRepository;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastraproduto.Produto;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.Usuario;
@@ -27,9 +28,9 @@ public class AdicionaOpiniaoController {
 
     @PostMapping(value = "/auth/produtos/{id}/opiniao",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
-    public ResponseEntity<OpiniaoDto> criaOpiniao(@RequestBody  @Valid NovaOpiniaoForm form, @PathVariable("id") Long id){
+    public ResponseEntity<OpiniaoDto> criaOpiniao(@RequestBody  @Valid NovaOpiniaoForm form, @PathVariable("id") Long id, UsuarioLogado usuarioLogado){
         Produto produto = manager.find(Produto.class, id);
-        Usuario consumidor = usuarioRepository.findByLogin("ane@pleno").get();
+        Usuario consumidor = usuarioRepository.findByLogin("ane@test").get();
         Opiniao novaOpiniao = form.converter(produto, consumidor);
         manager.persist(novaOpiniao);
 

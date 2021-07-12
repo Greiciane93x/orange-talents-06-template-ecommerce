@@ -81,7 +81,6 @@ public class ProdutoForm {
     }
 
 
-
     public Produto converter(EntityManager manager, Usuario usuarioAuthCadastroProduto) {
         @NotNull @NotBlank Categoria categoria = manager.find(Categoria.class, idCategoria);
         return new Produto(nome, valor, quantidade, descricao, categoria, usuarioAuthCadastroProduto, caracteristicas);

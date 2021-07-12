@@ -1,5 +1,6 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.adicionapergunta;
 
+import br.com.zupacademy.ane.mercadolivre.mercadolivre.fechamentocompra.Compra;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -17,4 +18,5 @@ public class Emails{
         mailer.send("<html>Isso é um envio de Email...</html>","Nova Pergunta: >>>>>>>>>>", pergunta.getQuemPerguntou().getEmail(), "novapergunta@nossomercadolivre.com",pergunta.getDonoProduto().getLogin());
 
     }
+
 }

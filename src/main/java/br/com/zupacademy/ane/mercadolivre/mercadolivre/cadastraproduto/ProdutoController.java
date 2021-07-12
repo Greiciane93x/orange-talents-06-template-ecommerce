@@ -1,11 +1,9 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastraproduto;
 
-import br.com.zupacademy.ane.mercadolivre.mercadolivre.autenticausuario.UsuarioLogado;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.autenticausuario.UsuarioRepository;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,8 +29,8 @@ public class ProdutoController {
 
     @Transactional
     @PostMapping(value="/auth/produto")
-    public ResponseEntity<ProdutoDto> criarProduto(@RequestBody @Valid ProdutoForm form, UsuarioLogado usuarioLogado){
-       Usuario usuarioAuthCadastroProduto = usuarioRepository.findByLogin("ane@pleno").get();
+    public ResponseEntity<ProdutoDto> criarProduto(@RequestBody @Valid ProdutoForm form){
+       Usuario usuarioAuthCadastroProduto = usuarioRepository.findByLogin("ane@teste").get();
 
            Produto produto = form.converter(manager,usuarioAuthCadastroProduto);
            manager.persist(produto);
@@ -44,7 +42,7 @@ public class ProdutoController {
     @Transactional
     public String adicionaImg(@PathVariable("id") Long id, @Valid NovasImgsForm form){
 
-        Usuario usuarioDono = usuarioRepository.findByLogin("ane@pleno").get();
+        Usuario usuarioDono = usuarioRepository.findByLogin("ane@teste").get();
         Produto produto = manager.find(Produto.class, id);
 
         if(!produto.isOwner(usuarioDono)) {

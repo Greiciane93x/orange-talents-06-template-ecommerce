@@ -5,6 +5,7 @@ import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.UsuarioSe
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
 public class UsuarioLogado {
 
     @NotNull @NotBlank

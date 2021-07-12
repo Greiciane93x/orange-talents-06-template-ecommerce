@@ -69,8 +69,6 @@ public class Produto {
         .map(caracterisca -> caracterisca.converter(this))
         .collect(Collectors.toSet()));
 
-        Assert.isTrue(this.caracteristicas.size() >= 3,
-                "Produto deve ter no mínimo 3 características");
     }
 
     public void vinculaImgs(Set<String> links) {
@@ -157,5 +155,14 @@ public class Produto {
                 '}';
     }
 
-
+    // o retorno aqui é boleano indicando que pode ser
+    // caso dos itens(produtos) do estoque não existirem
+    public boolean abataEstoque(@Positive int quantidade) {
+        Assert.isTrue(quantidade > 0, "A quantidade deve ser maior do que zero" + quantidade);
+        if(quantidade <= this.quantidade){
+            this.quantidade -= quantidade;
+            return true;
+        }
+        return false;
+    }
 }

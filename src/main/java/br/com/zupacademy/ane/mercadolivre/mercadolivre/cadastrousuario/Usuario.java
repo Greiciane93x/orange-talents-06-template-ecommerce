@@ -86,4 +86,5 @@ public class Usuario implements UserDetails {
     public String getEmail() {
         return this.login;
     }
+
 }
