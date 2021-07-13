@@ -18,7 +18,7 @@ public class UsuarioController {
 
     @PostMapping(value = "/usuario")
     @Transactional
-    public ResponseEntity<UsuarioDto> cadastrar(@RequestBody @Valid UsuarioForm form) {
+    public ResponseEntity<UsuarioDto> cadastrar(@RequestBody UsuarioForm form) {
         Usuario usuario = form.converter(manager);
         manager.persist(usuario);
 

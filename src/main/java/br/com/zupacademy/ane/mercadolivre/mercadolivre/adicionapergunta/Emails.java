@@ -15,7 +15,7 @@ public class Emails{
 
     public void novaPergunta(@NotNull @Valid  Pergunta pergunta) {
 
-        mailer.send("<html>Isso é um envio de Email...</html>","Nova Pergunta: >>>>>>>>>>", pergunta.getQuemPerguntou().getEmail(), "novapergunta@nossomercadolivre.com",pergunta.getDonoProduto().getLogin());
+        mailer.send("<html>Isso é um envio de Email...</html>","Nova Pergunta: >>>>>>>>>>", pergunta.getQuemPerguntou().getLogin(), "novapergunta@nossomercadolivre.com",pergunta.getDonoProduto().getLogin());
 
     }
 

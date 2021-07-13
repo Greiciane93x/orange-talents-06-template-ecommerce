@@ -52,7 +52,18 @@ public class CaracteristicaProduto {
     }
 
     @Override
+    public String toString() {
+        return "CaracteristicaProduto{" +
+                "nome='" + nome + '\'' +
+                ", produto=" + produto +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(nome, descricao, produto);
     }
+
+
+
 }

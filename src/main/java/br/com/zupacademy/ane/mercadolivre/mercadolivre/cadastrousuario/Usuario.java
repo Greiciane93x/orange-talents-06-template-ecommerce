@@ -13,27 +13,31 @@ import java.util.Collection;
 public class Usuario implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false, unique = true)
     private String login;
-    @Size(min = 6)
-    @Column(nullable = false)
+
+    @Size(min = 6)  @Column(nullable = false)
     private String senha;
+
     @Column(nullable = false)
     @PastOrPresent
     private LocalDate instante;
 
+    @Deprecated
     public Usuario() {
     }
 
-    public Usuario(String login, UsuarioSenhaLimpa senhaLimpaUsuario) {
-        this.login = login;
-        this.senha = senhaLimpaUsuario.hash();
+    public Usuario(String username,LocalDate instante, String senhaLimpa) {
+        this.login = username;
+        this.senha = senhaLimpa;
         this.instante = instante.now();
     }
 
-    public Usuario(String login, String senha) {
+    public Usuario(String username) {
+        this.login = username;
     }
 
     public String getLogin() {
@@ -55,36 +59,31 @@ public class Usuario implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.senha;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.login;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
-
-    public String getEmail() {
-        return this.login;
-    }
-
 }

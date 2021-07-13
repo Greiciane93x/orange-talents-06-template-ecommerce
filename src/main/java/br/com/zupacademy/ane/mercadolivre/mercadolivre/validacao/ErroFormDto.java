@@ -4,6 +4,7 @@ public class ErroFormDto {
     private String nome;
     private String erro;
 
+
     public ErroFormDto(String nome, String erro) {
         this.nome = nome;
         this.erro = erro;

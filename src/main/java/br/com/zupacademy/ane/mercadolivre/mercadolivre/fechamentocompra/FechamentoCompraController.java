@@ -1,7 +1,6 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.fechamentocompra;
 
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.adicionapergunta.Emails;
-import br.com.zupacademy.ane.mercadolivre.mercadolivre.autenticausuario.UsuarioLogado;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.autenticausuario.UsuarioRepository;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastraproduto.Produto;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.Usuario;

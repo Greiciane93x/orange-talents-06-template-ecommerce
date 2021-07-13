@@ -10,6 +10,10 @@ public class UsuarioSenhaLimpa {
 
     private String senha;
 
+    @Deprecated
+    public UsuarioSenhaLimpa() {
+    }
+
     public UsuarioSenhaLimpa(String senha){
 
         Assert.hasLength(senha, "Sua senha não pode ser em branco!");

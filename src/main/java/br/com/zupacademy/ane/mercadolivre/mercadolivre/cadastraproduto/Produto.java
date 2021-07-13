@@ -116,7 +116,8 @@ public class Produto {
         return caracteristicas;
     }
 
-    public Set<DetalheProdutoCaracteristica> mapeiaCaracteristica(Function<CaracteristicaProduto, DetalheProdutoCaracteristica> funcaoMapeadora){
+    public Set<DetalheProdutoCaracteristica> mapeiaCaracteristica(Function<CaracteristicaProduto,
+            DetalheProdutoCaracteristica> funcaoMapeadora){
         return this.caracteristicas.stream().map(funcaoMapeadora).collect(Collectors.toSet());
     }
     public <T>Set<T> mapeiaLinks(Function<ImagemProduto, T> funcaoMapeadora){
@@ -139,22 +140,6 @@ public class Produto {
         return Objects.hash(id, nome, valor, quantidade, descricao, instante, categoria, usuarioAuth);
     }
 
-    @Override
-    public String toString() {
-        return "Produto{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", valor=" + valor +
-                ", quantidade=" + quantidade +
-                ", descricao='" + descricao + '\'' +
-                ", instante=" + instante +
-                ", categoria=" + categoria +
-                ", usuarioAuth=" + usuarioAuth +
-                ", caracteristicas=" + caracteristicas +
-                ", images=" + images +
-                '}';
-    }
-
     // o retorno aqui é boleano indicando que pode ser
     // caso dos itens(produtos) do estoque não existirem
     public boolean abataEstoque(@Positive int quantidade) {
@@ -165,4 +150,5 @@ public class Produto {
         }
         return false;
     }
+
 }

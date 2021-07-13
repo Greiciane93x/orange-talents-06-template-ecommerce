@@ -1,16 +1,31 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.seguranca;
 
+import br.com.zupacademy.ane.mercadolivre.mercadolivre.autenticausuario.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private FiltroAutorizacaoUsuario authenticateUsuario;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
 
     @Override
     public void configure(HttpSecurity http) throws Exception{
@@ -20,16 +35,33 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/categoria").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/auth/**").permitAll()
+                .antMatchers("/token").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf()
                 .disable()
+                .addFilterBefore(authenticateUsuario, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    }
 
+    }
     public void configure(WebSecurity web) throws Exception{
-        web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**","/swagger-resources/**" );
+        web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**","/swagger-resources/**");
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws  Exception{
+        auth.userDetailsService(userDetails -> {
+            return usuarioRepository.findByLogin(userDetails).orElseThrow(() ->
+                new UsernameNotFoundException("Usuário" + userDetails + "não existe"));
+        }).passwordEncoder(new BCryptPasswordEncoder());
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+        }
     }
 
 
-}
+

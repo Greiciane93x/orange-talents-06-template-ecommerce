@@ -30,7 +30,7 @@ public class ProdutoController {
     @Transactional
     @PostMapping(value="/auth/produto")
     public ResponseEntity<ProdutoDto> criarProduto(@RequestBody @Valid ProdutoForm form){
-       Usuario usuarioAuthCadastroProduto = usuarioRepository.findByLogin("ane@teste").get();
+       Usuario usuarioAuthCadastroProduto = usuarioRepository.findByLogin("ane@test").get();
 
            Produto produto = form.converter(manager,usuarioAuthCadastroProduto);
            manager.persist(produto);
