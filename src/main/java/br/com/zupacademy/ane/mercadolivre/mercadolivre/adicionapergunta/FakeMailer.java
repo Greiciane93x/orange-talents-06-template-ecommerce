@@ -16,16 +16,18 @@ public class FakeMailer implements Mailer{
      * @param nameFrom     - Nome para aparecer no provedor de Email
      * @param from         - Email de Origem
      * @param to           - Email de Destino
+     * @return
      */
     @Override
-    public void send(@NotBlank String corpoEmail, @NotBlank String assuntoEmail,
-                     @NotBlank String nameFrom, @NotBlank @Email String from,
-                     @NotBlank @Email String to) {
+    public String send(@NotBlank String corpoEmail, @NotBlank String assuntoEmail,
+                       @NotBlank String nameFrom, @NotBlank @Email String from,
+                       @NotBlank @Email String to) {
 
         System.out.println(corpoEmail);
         System.out.println(assuntoEmail);
         System.out.println(nameFrom);
         System.out.println(from);
         System.out.println(to);
+        return corpoEmail;
     }
 }

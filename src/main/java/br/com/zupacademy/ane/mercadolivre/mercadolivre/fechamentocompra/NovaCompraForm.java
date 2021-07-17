@@ -32,14 +32,12 @@ public class NovaCompraForm {
     public String getStatusCompra() {
         return statusCompra;
     }
-
     public Long getIdProduto() {
         return  idProduto;
     }
     public int getQuantidade() {
         return quantidade;
     }
-
     public GatewayPagamento getGateway() {
         return gateway;
     }

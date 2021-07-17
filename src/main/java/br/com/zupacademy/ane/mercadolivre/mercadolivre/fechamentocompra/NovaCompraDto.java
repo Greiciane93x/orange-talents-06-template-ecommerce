@@ -6,7 +6,7 @@ public class NovaCompraDto {
 
     public NovaCompraDto(String urlRedirecionamento) {
         this.urlRedirecionamento = urlRedirecionamento;
-        this.statusCompra = "FINALIZADO";
+        this.statusCompra = "EM ANDAMENTO";
     }
 
     public String getUrlRedirecionamento() {

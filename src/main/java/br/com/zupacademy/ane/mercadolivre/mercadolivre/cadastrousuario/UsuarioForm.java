@@ -1,6 +1,7 @@
 package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario;
 
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.validacao.ValorUnico;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.Email;
@@ -26,7 +27,7 @@ public class UsuarioForm {
     public UsuarioForm(String login,LocalDate instante, String senha) {
         this.login = login;
         this.instante = instante.now();
-        this.senha = senha;
+        this.senha = new BCryptPasswordEncoder().encode(senha);
 
     }
 
@@ -39,8 +40,7 @@ public class UsuarioForm {
     public LocalDate getInstante() { return instante; }
 
     public Usuario converter(EntityManager manager) {
-       return new Usuario(login, instante, senha);
+       return new Usuario(login, instante, new UsuarioSenhaLimpa(senha).hash());
     }
-
 
 }

@@ -18,5 +18,5 @@ public class Emails{
         mailer.send("<html>Isso é um envio de Email...</html>","Nova Pergunta: >>>>>>>>>>", pergunta.getQuemPerguntou().getLogin(), "novapergunta@nossomercadolivre.com",pergunta.getDonoProduto().getLogin());
 
     }
-
+    
 }

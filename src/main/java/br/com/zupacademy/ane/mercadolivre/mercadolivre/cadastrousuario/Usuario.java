@@ -2,6 +2,7 @@ package br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.PastOrPresent;
@@ -30,9 +31,9 @@ public class Usuario implements UserDetails {
     public Usuario() {
     }
 
-    public Usuario(String username,LocalDate instante, String senhaLimpa) {
+    public Usuario(String username,LocalDate instante, String senha) {
         this.login = username;
-        this.senha = senhaLimpa;
+        this.senha = new BCryptPasswordEncoder().encode(senha);
         this.instante = instante.now();
     }
 
@@ -50,6 +51,10 @@ public class Usuario implements UserDetails {
 
     public LocalDate getInstante() {
         return instante;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override

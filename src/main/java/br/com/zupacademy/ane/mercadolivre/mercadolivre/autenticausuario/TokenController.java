@@ -2,6 +2,7 @@ package br.com.zupacademy.ane.mercadolivre.mercadolivre.autenticausuario;
 
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.Usuario;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.UsuarioForm;
+import br.com.zupacademy.ane.mercadolivre.mercadolivre.cadastrousuario.UsuarioSenhaLimpa;
 import br.com.zupacademy.ane.mercadolivre.mercadolivre.seguranca.GerenciadorDeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
